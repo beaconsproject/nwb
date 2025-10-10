@@ -1,0 +1,74 @@
+---
+output:
+  html_document:
+    theme: cosmo
+---
+
+<br>
+
+<h3>Overview of NWBLCC Planning Region (click on ecoregion to view MDR value^1^)</h3>
+
+```{r, echo=FALSE, message=F, warning=F}
+suppressMessages(library(leaflet))
+suppressMessages(library(raster))
+suppressMessages(library(rgeos))
+ecoregions = shapefile("_shp/nwblcc_ecoregions.shp") # mdrS1
+ecoregions$area_km2 <- gArea(ecoregions, byid=TRUE)/1000000
+ecoregions$area_mi2 <- ecoregions$area_km2 * 0.621371
+ecoregions$mdrS1_km2 <- as.numeric(ecoregions$mdrS1)
+ecoregions$mdrS1_mi2 <- ecoregions$mdrS1_km2 * 0.621371
+ecoregions$area_km2 <- round(ecoregions$area_km2, 0)
+ecoregions$area_mi2 <- round(ecoregions$area_mi2, 0)
+ecoregions$mdrS1_mi2 <- round(ecoregions$mdrS1_mi2, 0)
+ecoregions$area_km2 <- format(ecoregions$area_km2, big.mark=',', scientific=FALSE)
+ecoregions$area_mi2 <- format(ecoregions$area_mi2, big.mark=',', scientific=FALSE)
+ecoregions$mdrS1_km2 <- format(ecoregions$mdrS1_km2, big.mark=',', scientific=FALSE)
+ecoregions$mdrS1_mi2 <- format(ecoregions$mdrS1_mi2, big.mark=',', scientific=FALSE)
+ecoregions$url <- paste0("eco",ecoregions$ecoregion,".html")
+ecoregionsLL <- spTransform(ecoregions, CRS("+proj=longlat +datum=WGS84"))
+#ecoPopup = paste0("<b>Ecoregion</b>: ",ecoregionsLL$ecoregion,"<br><b>Area</b>: ",ecoregionsLL$area_km2," km2 / ",ecoregionsLL$area_mi2," mi2<br><b>MDR</b>: ",ecoregionsLL$mdrS1_km2," km2 / ",ecoregionsLL$mdrS1_mi2," mi2")
+ecoPopup = paste0("<b>Ecoregion</b>: ",ecoregionsLL$ecoregion,"<br><b>Area</b>: ",ecoregionsLL$area_km2," km2 / ",ecoregionsLL$area_mi2," mi2<br><b>MDR</b>: ",ecoregionsLL$mdrS1_km2," km2 / ",ecoregionsLL$mdrS1_mi2," mi2<br><a href=",ecoregionsLL$url,">Go to ecoregion ",ecoregions$ecoregion," website...</a>")
+pas <- shapefile("_shp/nwblcc_pas.shp")
+pasLL <- spTransform(pas, CRS("+proj=longlat +datum=WGS84"))
+intact <-  shapefile("_shp/nwblcc_intact.shp")
+intactLL <- spTransform(intact, CRS("+proj=longlat +datum=WGS84"))
+fdahuc <-  shapefile("_shp/nwblcc_fdahuc.shp")
+fdahucLL <- spTransform(fdahuc, CRS("+proj=longlat +datum=WGS84"))
+
+#ecoCentroid <- coordinates(ecoregionsLL)
+#xmean <- mean(ecoCentroid[,1])
+#ymean <- mean(ecoCentroid[,2])
+xmean <- xmin(ecoregionsLL) + (xmax(ecoregionsLL) - xmin(ecoregionsLL)) / 2
+ymean <- ymin(ecoregionsLL) + (ymax(ecoregionsLL) - ymin(ecoregionsLL)) / 2
+m <- leaflet(ecoregionsLL, width = 1000, height = 800) %>% setView(xmean, ymean, zoom=5) %>%
+	addProviderTiles("Esri.NatGeoWorldMap", group="Esri.NatGeoWorldMap") %>%
+	addProviderTiles("Esri.WorldImagery", group="Esri.WorldImagery") %>%
+	#addProviderTiles("CartoDB.Positron", group="CartoDB.Positron") %>%
+	#addPolygons(data=ecoregionsLL, fill=T, weight=2, color="black", fillOpacity=0, group="Ecoregions", popup=ecoPopup)
+	addPolygons(data=ecoregionsLL, fill=T, fillOpacity=0, weight=2, col="black", group="Ecoregions", popup=ecoPopup, highlightOptions=highlightOptions(color="blue",weight=4,bringToFront=TRUE))
+
+#for (i in ecoregionsLL$ecoregion) {
+#	coords <- coordinates(ecoregionsLL[ecoregionsLL$ecoregion==i,])
+#	if (as.numeric(i) < 10) {
+#		ecoIcon = makeIcon(paste0("_png/",i,".png"), paste0("_png/",i,".png"), 15, 21)
+#	} else if (as.numeric(i) > 10 & as.numeric(i) < 100) {
+#		ecoIcon = makeIcon(paste0("_png/",i,".png"), paste0("_png/",i,".png"), 24, 21)
+#	} else {
+#		ecoIcon = makeIcon(paste0("_png/",i,".png"), paste0("_png/",i,".png"), 40, 21)
+#	}
+#	#m <- m %>% addMarkers(coords[,1], coords[,2], icon=ecoIcon)
+#}
+
+m <- m %>% addPolygons(data=fdahucLL, fill=F, weight=1, color="blue", group="FDA-HUC8") %>%
+	addPolygons(data=pasLL, fill=T, weight=1, color="blue", fillOpacity=0.5, group="Protected Areas") %>%
+	addPolygons(data=intactLL, fill=T, weight=1, color="darkgreen", fillOpacity=0.5, group="Intactness") %>%
+		addLayersControl(position = "topright",
+		baseGroups=c("Esri.NatGeoWorldMap","Esri.WorldImagery"),
+		overlayGroups = c("Protected Areas","Ecoregions","FDA-HUC8","Intactness"),
+		options = layersControlOptions(collapsed = FALSE)) %>%
+		hideGroup(c("FDA-HUC8","Protected Areas","Intactness"))
+m
+
+```
+
+^1^ [Minimum Dynamic Reserve](downloads/mdr_report/BEACONs_mdr_report.pdf) (MDR) is the minimum area required for a benchmark to maintain representation of vulnerable vegetation types under an active natural disturbance regime (e.g., fire and insect outbreaks)

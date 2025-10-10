@@ -1,0 +1,53 @@
+---
+output:
+  html_document:
+    theme: cosmo
+    css: _styles.css
+---
+
+
+<div class = "row">
+<div class = "col-md-6">
+
+<table>
+<tr>
+<td><a href="http://www.beaconsproject.ca"><img src="images/logos/beacons.png" align="left"></a></td>
+<td valign=top><h3>Candidate Benchmark Networks for<br>the Northwest Boreal LCC</h3><h4>BEACONs Project, University of Alberta</h4></td>
+</tr>
+</table>
+
+<p align=justify>This website hosts interactive maps and tables for candidate benchmark networks designed for the ecoregions of the Northwest Boreal Landscape Conservation Cooperative ([NWBLCC](http://nwblcc.org/); Figure 1). Candidate benchmark networks were identified and ranked based on fundamental benchmark properties, resilience to climate change, and  representation of habitat for a suite of priority focal species. [More information...](http://www.beaconsproject.ca/nwb)</p>
+
+<p align=justify>Given the spatial extent of the analysis and the volume of options available, detailed benchmark recommendations are not presented. See [main report](http://www.beaconsproject.ca/nwb) for guidelines on finer examination of potential solutions.</p>
+
+**Website Structure**
+
+- **Overview** - interactive map of the NWBLCC planning region.
+<p align=justify>*The overview map includes the following data layers and information: ecoregions, hydrology units, intactness, protected areas, and MDR estimates.*</p>
+
+- **Ecoregion Explorer** - interactive maps and tables of ecoregion results.
+<p align=justify>*Results are organized by ecoregion and include maps that display spatial layers for benchmark networks, biophysical indicators, climate change indicators, and focal species habitat. The maps are accompanied by tables with network rankings based on the layers displayed.*</p>
+
+- **Downloads** - reports, tables, and shapefiles available for download.
+
+**Viewing Recommendations**
+
+<p align=justify>The website is best viewed on a minimum screen size of 20" and a resolution of 1920x1080. To display maps and their legends properly on smaller screens, zoom out in the browser settings (e.g., [Chrome]( https://support.google.com/chrome/answer/96810?hl=en)).</p>
+
+</div>
+<div class = "col-md-6">
+
+<br>
+<a href="images/ecoregions.png"><img src="images/ecoregions.png"></a><br>
+<p align=justify>Figure 1. The NWBLCC planning region is comprised of 30 ecoregions (black outline and identified by number) defined by the Unified Ecoregions of Alaska ([Nowacki et al. 2001](https://agdc.usgs.gov/data/usgs/erosafo/ecoreg/)) and the National Ecological Framework of Canada ([Marshall et al. 1999](http://sis.agr.gc.ca/cansis/nsdb/ecostrat/1999report/index.html)). Ecoregion 23 was further stratified using ecodistricts to account for differences in vegetation cover and the estimation of MDRs ([BEACONs 2017](downloads.html)). Protected areas are shown in green.</p>
+
+<p align=justify>This project is a collaboration between the BEACONs Project (University of Alberta and Yukon College) and the Northwest Boreal Landscape Conservation Cooperative. Support for this work was provided by the NWBLCC and its partners, the Wilburforce Foundation, the University of Alberta, and the Yukon Research Centre.</p>
+
+<table><tr>
+<td><img src="images/logos/ualberta.png"></td>
+<td><img src="images/logos/yukon.png" width=200></td>
+<td><img src="images/logos/nwblcc.png"></td>
+</tr></table>
+
+</div>
+</div>

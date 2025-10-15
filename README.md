@@ -1,5 +1,5 @@
 ## Candidate Benchmark Networks for the Northwest Boreal Region
-Updated: October 10, 2025
+Updated: October 15, 2025
 
 BEACONs partnered with the Northwest Boreal Partnership (formerly known as Northwest Boreal Landscape Conservation Cooperative or NWBLCC) to identify ecological benchmarks to advance landscape conservation across a large, dynamic region of Canada and Alaska. Support for this work was provided by the NWB Partnership, Wilburforce Foundation, University of Alberta, and Yukon Research Centre.
 

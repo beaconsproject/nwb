@@ -17,7 +17,7 @@ WMI Outdoor News Bulletin - click here https://wildlifemanagement.institute/outd
 Conserving Large Landscapes: Science to Support Pro-Active Conservation Planning - YouTube
 
 ### Reports
-####Ecological Benchmarks to Support Landscape Conservation Design in the NWBLCC
+#### Ecological Benchmarks to Support Landscape Conservation Design in the NWBLCC
 
 Benchmark Report - PDF
 Ecoregion Reports - ZIP
@@ -30,7 +30,7 @@ Appendix B - Conservation Goals and Targets - XLSX
 Appendix C - Experts Consulted - PDF
 Appendix D - Inventory of Focal Species Datasets - XLSX
 
-####Estimating Minimum Dynamic Reserves
+#### Estimating Minimum Dynamic Reserves
 
 MDR Analysis Report - PDF
 
